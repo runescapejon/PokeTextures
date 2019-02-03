@@ -2,7 +2,7 @@ package com.runescapejon.poketexture.command;
 
 import com.pixelmonmod.pixelmon.config.PixelmonEntityList;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
-import com.pixelmonmod.pixelmon.enums.EnumPokemon;
+import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.runescapejon.poketexture.main.PokeTexture;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,7 +20,6 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
-
 public class Spawn implements CommandExecutor {
 	PokeTexture plugin;
 
@@ -30,7 +29,7 @@ public class Spawn implements CommandExecutor {
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
 
-		EnumPokemon p = (EnumPokemon) args.getOne("pokemon").get();
+		EnumSpecies p = (EnumSpecies) args.getOne("pokemon").get();
 		String value = (String) args.getOne("Value").get();
 		WorldServer world;
 		if ((src instanceof EntityPlayerMP)) {

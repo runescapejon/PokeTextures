@@ -1,7 +1,7 @@
 package com.runescapejon.poketexture.main;
 
 import com.google.inject.Inject;
-import com.pixelmonmod.pixelmon.enums.EnumPokemon;
+import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.runescapejon.poketexture.command.PTGive;
 import com.runescapejon.poketexture.command.Spawn;
 
@@ -34,8 +34,8 @@ public class PokeTexture {
 	@SuppressWarnings("rawtypes")
 	private void loadCommands() {
 		@SuppressWarnings("unchecked")
-		Map<String, EnumPokemon> m = new HashMap();
-		for (EnumPokemon p : EnumPokemon.values()) {
+		Map<String, EnumSpecies> m = new HashMap();
+		for (EnumSpecies p : EnumSpecies.values()) {
 			m.put(p.name, p);
 		}
 		CommandSpec spawn = CommandSpec.builder().description(Text.of("Spawn pokemon in at the location of the player"))
