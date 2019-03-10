@@ -1,34 +1,104 @@
 package com.runescapejon.poketexture.main;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.args.GenericArguments;
+import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.config.ConfigDir;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.GameReloadEvent;
+import org.spongepowered.api.event.game.state.GameInitializationEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.text.Text;
+
+import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.runescapejon.poketexture.command.PTGive;
 import com.runescapejon.poketexture.command.Spawn;
 
-import java.util.HashMap;
-import java.util.Map;
-import org.slf4j.Logger;
-import org.spongepowered.api.Sponge;
-import org.spongepowered.api.command.args.GenericArguments;
-import org.spongepowered.api.command.spec.CommandSpec;
-import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
+import ninja.leaping.configurate.ConfigurationOptions;
+import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
+import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 
-@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.1", authors = "runescapejon")
+@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.2", authors = "runescapejon")
 public class PokeTexture {
-	@Inject
-	private Logger logger;
 
+	private PokeTexture plugin;
+	private Logger logger;
+	private Config configmsg;
+	GuiceObjectMapperFactory factory;
+	private final File configDirectory;
 	public static PokeTexture instance;
+
+	@Inject
+	public PokeTexture(Logger logger, @ConfigDir(sharedRoot = false) File configDir, GuiceObjectMapperFactory factory) {
+		this.logger = logger;
+
+		this.configDirectory = configDir;
+		this.factory = factory;
+		instance = this;
+	}
 
 	@Listener
 	public void onStartUp(GameInitializationEvent e) {
 		instance = this;
-
+		loadConfig();
 		loadCommands();
 
+	}
+	@Listener
+	public void onPreInit(GamePreInitializationEvent event) {
+		plugin = this;
+		loadConfig();
+	}
+
+	@Listener
+	public void onReload(GameReloadEvent event) {
+		loadConfig();
+	}
+
+	public boolean loadConfig() {
+		if (!plugin.getConfigDirectory().exists()) {
+			plugin.getConfigDirectory().mkdirs();
+		}
+		try {
+			File configFile = new File(getConfigDirectory(), "configuration.conf");
+			if (!configFile.exists()) {
+				configFile.createNewFile();
+				logger.info("Creating Config for PokeTexture");
+			}
+			ConfigurationLoader<CommentedConfigurationNode> loader = HoconConfigurationLoader.builder()
+					.setFile(configFile).build();
+			CommentedConfigurationNode config = loader.load(ConfigurationOptions.defaults()
+					.setObjectMapperFactory(plugin.getFactory()).setShouldCopyDefaults(true));
+			configmsg = config.getValue(TypeToken.of(Config.class), new Config());
+			loader.save(config);
+			return true;
+		} catch (Exception error) {
+			getLogger().error("coudnt make the config", error);
+
+			return false;
+		}
+	}
+
+	public File getConfigDirectory() {
+		return configDirectory;
+	}
+
+	public Config getLangCfg() {
+		return configmsg;
+	}
+
+	public GuiceObjectMapperFactory getFactory() {
+		return factory;
 	}
 
 	@SuppressWarnings("rawtypes")
