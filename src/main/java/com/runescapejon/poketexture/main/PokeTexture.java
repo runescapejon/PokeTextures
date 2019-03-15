@@ -30,7 +30,7 @@ import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 
-@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.2", authors = "runescapejon")
+@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.3", authors = "runescapejon")
 public class PokeTexture {
 
 	private PokeTexture plugin;
