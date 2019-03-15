@@ -21,7 +21,7 @@ public class Config {
 	public static String PokeGiveTargetMessage = "&c[ServerName]&b You've received a %pokemon% enjoy!";
 
 	@Setting(value = "AllowTexturePokemonToSpawn", comment = "Allow custom texture pokemon to spawn.")
-	public static boolean AllowTexturePokemonToSpawn = true;
+	public static boolean AllowTexturePokemonToSpawn = false;
 
 	@Setting(value = "CustomTexture", comment = "Custom Texture this option give the ability to choose what custom texture folder it will use")
 	public static String CustomTexture = "test";
