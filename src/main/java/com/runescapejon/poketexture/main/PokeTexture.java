@@ -54,8 +54,6 @@ public class PokeTexture {
 		instance = this;
 		loadConfig();
 		loadCommands();
-		ListenerSpawn LS = new ListenerSpawn();
-		Sponge.getEventManager().registerListeners(this, LS);
 		Pixelmon.EVENT_BUS.register(new ListenerSpawn());
 	}
 
