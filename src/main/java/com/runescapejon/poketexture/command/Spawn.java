@@ -50,7 +50,8 @@ public class Spawn implements CommandExecutor {
 			Location<World> loc = (Location<World>) player.getLocation();
 			pokemon.setLocationAndAngles(loc.getX(), loc.getY(), loc.getZ(), 0.0f, 0.0f);
 			world.spawnEntity(pokemon);
-			src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(Config.PokeSpawnMessage.replace("%pokemon%", p.name())));
+			src.sendMessage(TextSerializers.FORMATTING_CODE
+					.deserialize(Config.PokeSpawnMessage.replace("%pokemon%", p.name())));
 		}
 
 		return CommandResult.success();

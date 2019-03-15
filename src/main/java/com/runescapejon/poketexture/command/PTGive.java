@@ -56,8 +56,8 @@ public class PTGive implements CommandExecutor {
 			storage.add(pokemon);
 			src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(
 					Config.PokeGiveMessage.replace("%pokemon%", p.name()).replace("%player%", player.getName())));
-			player.sendMessage(
-					TextSerializers.FORMATTING_CODE.deserialize(Config.PokeGiveTargetMessage.replace("%pokemon%", p.name())));
+			player.sendMessage(TextSerializers.FORMATTING_CODE
+					.deserialize(Config.PokeGiveTargetMessage.replace("%pokemon%", p.name())));
 			player.playSound(SoundTypes.ENTITY_PLAYER_LEVELUP, player.getLocation().getPosition(), 1);
 		}
 

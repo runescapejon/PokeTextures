@@ -18,10 +18,12 @@ import org.spongepowered.api.text.Text;
 
 import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
+import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.runescapejon.poketexture.command.PTGive;
 import com.runescapejon.poketexture.command.Spawn;
 
+ 
 import ninja.leaping.configurate.ConfigurationOptions;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
@@ -52,8 +54,11 @@ public class PokeTexture {
 		instance = this;
 		loadConfig();
 		loadCommands();
-
+		ListenerSpawn LS = new ListenerSpawn();
+		Sponge.getEventManager().registerListeners(this, LS);
+		Pixelmon.EVENT_BUS.register(new ListenerSpawn());
 	}
+
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event) {
 		plugin = this;
