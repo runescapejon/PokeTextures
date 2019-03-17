@@ -21,7 +21,7 @@ public class ListenerSpawn {
 							entityPixelmon.canDespawn = false;
 							entityPixelmon.getPokemonData().setCustomTexture(Config.CustomTexture);
 							entityPixelmon.getPokemonData().setNickname(
-									Config.SetColorName.replace("&", "\u00A7") + entityPixelmon.getSpecies().name);
+									Config.SetColorName.replace("&", "\u00A7") + entityPixelmon.getName());
 						}
 					}
 				}
