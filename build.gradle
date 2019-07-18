@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+group 'com.runescapejon.poketexture.command'
+version '1.12.2.-S7.1'
+archivesBaseName = "PokeTextures"
+
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = "1.12.2-14.23.1.2555"
+    runDir = "run"
+    mappings = "snapshot_20170919"
+    useDepAts = true
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'mods', include: '*.jar')
+    compile 'org.spongepowered:spongeapi:7.1.0'
+    compile "org.projectlombok:lombok:1.16.10"
+	compile group: 'com.zaxxer', name: 'HikariCP', version: '2.5.1'
+    testCompile "junit:junit:4.11"
+}
+[tasks.deobfMcMCP, tasks.deobfMcSRG].each { it.failOnAtError = false }
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+        
+    // copy everything else, thats not the mcmod.info
+}
