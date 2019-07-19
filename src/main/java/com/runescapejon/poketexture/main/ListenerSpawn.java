@@ -13,7 +13,7 @@ public class ListenerSpawn {
 	public void onSpawnEntityEvent(SpawnEvent event) {
 		if (Config.AllowTexturePokemonToSpawn) {
 			Random rand = new Random();
-			if (rand.nextInt(100) + 1 <= Config.Chance) {
+			if (rand.nextInt(Config.AttemptToSpawnRandom) + 1 <= Config.Chance) {
 				if (event.action instanceof SpawnActionPokemon) {
 					EntityPixelmon entityPixelmon = ((SpawnActionPokemon) event.action).getOrCreateEntity();
 					for (String name : Config.PokemonList) {

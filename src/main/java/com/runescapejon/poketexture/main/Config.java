@@ -37,6 +37,9 @@ public class Config {
 	@Setting(value = "Chance", comment = "Attempt chanaces between 1-100 it will attempt to spawn in custom texture pokemon.")
 	public static int Chance = 2;
 
+	@Setting(value = "AttemptToSpawnRandom", comment = "Sort of like Chance config option but you can change it the 100 part. So, you can change like this example 1-1000 increasing the odds")
+	public static int AttemptToSpawnRandom = 100;
+	
 	@Setting(value = "SetColorName", comment = "Set a color name to a custom texture pokemon to help better in indicate a texture pokemon")
 	public static String SetColorName = "&b";
 }
