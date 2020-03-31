@@ -34,7 +34,7 @@ public class PTGive implements CommandExecutor {
 	}
 
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-		EnumSpecies p = (EnumSpecies) args.getOne("pokemon").get();
+		EnumSpecies p = args.<EnumSpecies>getOne("Pokemon").orElse(null);
 		Optional<Player> target = args.<Player>getOne("PlayerName");
 		String value = (String) args.getOne("Value").get();
 		WorldServer world;
@@ -45,7 +45,7 @@ public class PTGive implements CommandExecutor {
 					.get();
 		}
 		NBTTagCompound nbt = new NBTTagCompound();
-		EntityPixelmon pokemonEntity = (EntityPixelmon) PixelmonEntityList.createEntityByName(p.name, world);
+		EntityPixelmon pokemonEntity = (EntityPixelmon) PixelmonEntityList.createEntityByName(p.name, world );
 		pokemonEntity.writeToNBT(nbt).setString("CustomTexture", value);
 		pokemonEntity.readFromNBT(nbt);
 		pokemonEntity.canDespawn = false;

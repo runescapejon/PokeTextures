@@ -30,7 +30,7 @@ import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
 
-@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.3", authors = "runescapejon")
+@Plugin(id = "poketextures", name = "pokeTexture", description = "This plugin for Editting Pokemon Texture with CustomTextures", version = "1.4", authors = "runescapejon")
 public class PokeTexture {
 
 	private PokeTexture plugin;
@@ -109,7 +109,7 @@ public class PokeTexture {
 		@SuppressWarnings("unchecked")
 		Map<String, EnumSpecies> m = new HashMap();
 		for (EnumSpecies p : EnumSpecies.values()) {
-			m.put(p.name, p);
+			m.put(p.name.toUpperCase(), p);
 		}
 		CommandSpec spawn = CommandSpec.builder().description(Text.of("Spawn pokemon in at the location of the player"))
 				.permission("poketexture.spawn")
@@ -121,7 +121,7 @@ public class PokeTexture {
 		CommandSpec PGive = CommandSpec.builder().description(Text.of("Give a specified player a Textured pokemon"))
 				.permission("poketexture.ptgive")
 				.arguments(
-						GenericArguments.seq(GenericArguments.choices(Text.of("pokemon"), m),
+						GenericArguments.seq(GenericArguments.enumValue(Text.of("Pokemon"), EnumSpecies.class),
 								GenericArguments.player(Text.of("PlayerName"))),
 						GenericArguments.string(Text.of("Value")))
 				.executor(new PTGive()).build();
