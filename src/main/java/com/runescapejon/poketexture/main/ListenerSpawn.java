@@ -20,9 +20,15 @@ public class ListenerSpawn {
 						if (entityPixelmon.getSpecies().name().equalsIgnoreCase(name)) {
 							entityPixelmon.canDespawn = false;
 							entityPixelmon.getPokemonData().setCustomTexture(Config.CustomTexture);
-							entityPixelmon.getPokemonData().setNickname(
-									Config.SetColorName.replace("&", "\u00A7") + entityPixelmon.getName());
+							entityPixelmon.getPokemonData()
+									.setNickname(Config.SetColorName.replace("&", "\u00A7") + entityPixelmon.getName());
 						}
+					}
+					if (Config.IgnorePokemonList == true) {
+						entityPixelmon.canDespawn = false;
+						entityPixelmon.getPokemonData().setCustomTexture(Config.CustomTexture);
+						entityPixelmon.getPokemonData()
+								.setNickname(Config.SetColorName.replace("&", "\u00A7") + entityPixelmon.getName());
 					}
 				}
 			}

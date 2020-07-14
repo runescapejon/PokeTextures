@@ -34,6 +34,9 @@ public class Config {
 			add(EnumSpecies.Nidoranfemale.name);
 		}
 	};
+	@Setting(value = "IgnorePokemonList", comment = "This config option here allow you to ignore PokemonList. By turning this true you are allowing ALL pokemon to have a possible custom texture spawn.")
+	public static boolean IgnorePokemonList = false;
+	
 	@Setting(value = "Chance", comment = "Attempt chanaces between 1-100 it will attempt to spawn in custom texture pokemon.")
 	public static int Chance = 2;
 
